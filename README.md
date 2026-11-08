@@ -5,7 +5,7 @@
 
 Chrono Critters is a gentle, colorful game that teaches young children how an analog clock works: the short hour hand, the long minute hand, and AM and PM. It is fully bilingual in **English** and **Japanese (日本語)**.
 
-**Recommended for ages 3+**
+**Recommended for ages 4+**
 
 - **Version:** v0.1.2
 - **Release date:** 2026-11-08

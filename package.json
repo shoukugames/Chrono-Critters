@@ -2,7 +2,7 @@
   "name": "chrono-critters",
   "productName": "Chrono Critters",
   "version": "0.1.2",
-  "description": "Learn to read an analog clock with cute animal friends! A bilingual (English / Japanese) clock-learning game for ages 3+.",
+  "description": "Learn to read an analog clock with cute animal friends! A bilingual (English / Japanese) clock-learning game for ages 4+.",
   "main": "main.js",
   "homepage": "https://shoukugames.org/",
   "author": {
@@ -42,7 +42,7 @@
       ],
       "category": "Education",
       "icon": "assets/icon.png",
-      "synopsis": "Learn to read an analog clock with cute animals (ages 3+)",
+      "synopsis": "Learn to read an analog clock with cute animals (ages 4+)",
       "description": "Chrono Critters is a bilingual (English / Japanese) game that teaches young children to read and set an analog clock, including AM and PM.",
       "maintainer": "Shawn Rapaz <info@shoukugames.org>",
       "vendor": "Shouku Games",

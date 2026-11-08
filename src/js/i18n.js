@@ -6,7 +6,7 @@ const STRINGS = {
   en: {
     title: 'Chrono Critters',
     subtitle: 'Learn to tell time with cute animal friends!',
-    ages: 'Ages 3+',
+    ages: 'Ages 4+',
     play: 'Play!',
     tutorial: 'How Clocks Work',
     stickers: 'Sticker Book',
@@ -143,7 +143,7 @@ const STRINGS = {
   ja: {
     title: 'クロノ・クリッターズ',
     subtitle: 'かわいい どうぶつと とけいを よもう！',
-    ages: '3さいから',
+    ages: '4さいから',
     play: 'あそぶ！',
     tutorial: 'とけいの よみかた',
     stickers: 'シールちょう',
