@@ -1,0 +1,197 @@
+<!doctype html>
+<!-- Chrono Critters v0.1.2 — Copyright (C) 2026 Shawn Rapaz — GPL-3.0-or-later -->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; script-src 'self'">
+  <title>Chrono Critters</title>
+  <link rel="stylesheet" href="fonts/500.css">
+  <link rel="stylesheet" href="fonts/800.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="stage">
+  <canvas id="scene" width="1280" height="720"></canvas>
+
+  <!-- ============ TITLE ============ -->
+  <section id="screen-title" class="screen">
+    <header class="logo">
+      <h1><span class="logo-word" data-i18n="title">Chrono Critters</span></h1>
+      <p class="subtitle" data-i18n="subtitle"></p>
+    </header>
+    <div class="age-badge"><span data-i18n="ages"></span></div>
+
+    <div class="title-left">
+      <button id="btnPlay" class="btn btn-play"><span class="ico" data-ico="play"></span><span data-i18n="play"></span></button>
+      <div class="panel toggles">
+        <div class="tg-row" id="tgMode"><span class="tg-label" data-i18n="mode"></span>
+          <div class="tg"><button data-v="set" data-i18n="modeSet"></button><button data-v="read" data-i18n="modeRead"></button></div></div>
+        <div class="tg-row" id="tgDiff"><span class="tg-label" data-i18n="difficulty"></span>
+          <div class="tg"><button data-v="easy" data-i18n="easy"></button><button data-v="medium" data-i18n="medium"></button><button data-v="hard" data-i18n="hard"></button></div></div>
+        <div class="tg-row" id="tgBgm"><span class="tg-label" data-i18n="bgm"></span>
+          <div class="tg"><button data-v="on" data-i18n="on"></button><button data-v="off" data-i18n="off"></button></div></div>
+        <div class="tg-row" id="tgVoice"><span class="tg-label" data-i18n="voice"></span>
+          <div class="tg"><button data-v="on" data-i18n="on"></button><button data-v="off" data-i18n="off"></button></div></div>
+        <div class="tg-row" id="tgLang"><span class="tg-label" data-i18n="language"></span>
+          <div class="tg"><button data-v="en">English</button><button data-v="ja">日本語</button></div></div>
+      </div>
+    </div>
+
+    <nav class="title-menu">
+      <button id="btnTutorial" class="btn btn-menu c1"><span class="ico" data-ico="book"></span><span data-i18n="tutorial"></span></button>
+      <button id="btnStickers" class="btn btn-menu c2"><span class="ico" data-ico="star"></span><span data-i18n="stickers"></span></button>
+      <button id="btnParents" class="btn btn-menu c3"><span class="ico" data-ico="heart"></span><span data-i18n="parents"></span></button>
+      <button id="btnCredits" class="btn btn-menu c4"><span class="ico" data-ico="info"></span><span data-i18n="credits"></span></button>
+    </nav>
+    <div class="version-tag">v0.1.2</div>
+  </section>
+
+  <!-- ============ STICKER BOOK / LEVEL MAP ============ -->
+  <section id="screen-map" class="screen">
+    <div class="topbar">
+      <button class="btn btn-small btn-back" data-go="title"><span class="ico" data-ico="home"></span><span data-i18n="home"></span></button>
+      <div class="map-title"><h2 data-i18n="stickers"></h2><span id="mapMode" class="chip"></span><span id="mapDiff" class="chip chip-soft"></span></div>
+      <div class="map-totals"><span class="chip chip-star"><span class="ico" data-ico="star"></span> <span id="mapStars">0</span>/72</span>
+        <span class="chip chip-score"><span data-i18n="score"></span> <b id="mapScore">0</b></span></div>
+    </div>
+    <p class="map-hint" data-i18n="pickLevel"></p>
+    <div id="mapGrid" class="map-grid"></div>
+  </section>
+
+  <!-- ============ GAME ============ -->
+  <section id="screen-game" class="screen">
+    <div class="hud-left">
+      <button id="btnPause" class="icon-btn" aria-label="pause"><span class="ico" data-ico="pause"></span></button>
+      <div class="lvl-card"><div id="hudLevel" class="lvl-num"></div><div id="hudAnimal" class="lvl-animal"></div></div>
+    </div>
+
+    <div id="targetCard" class="target-card">
+      <div id="tPrompt" class="t-prompt"></div>
+      <div id="tMain" class="t-main"><span id="tAmPm" class="t-ampm"></span><span id="tDigits" class="t-digits"></span></div>
+      <div id="tPeriod" class="t-period"></div>
+      <div id="tWords" class="t-words"></div>
+      <button id="btnListen" class="icon-btn listen" aria-label="listen"><span class="ico" data-ico="speaker"></span></button>
+    </div>
+
+    <div class="hud-right"><div class="score-card"><span class="ico" data-ico="star"></span><span id="hudScore">0</span></div>
+      <div id="hudStarsNow" class="stars-now"></div></div>
+
+    <button id="ampmPill" class="ampm-pill"><span class="pill-label" data-i18n="yourClock"></span><span id="pillVal" class="pill-val"></span><kbd>Space</kbd></button>
+
+    <div id="bubble" class="bubble"></div>
+
+    <div id="setControls" class="controls">
+      <div class="cgroup hourc"><button class="key" data-act="hup">▲</button><button class="key" data-act="hdown">▼</button><span class="clabel" data-i18n="hourHand"></span></div>
+      <div class="cgroup minc"><button class="key" data-act="mleft">◀</button><button class="key" data-act="mright">▶</button><span class="clabel" data-i18n="minuteHand"></span></div>
+      <div class="cgroup ampmc"><button class="key wide" data-act="ampm">Space</button><span class="clabel" data-i18n="ampmKey"></span></div>
+      <button class="btn btn-check" data-act="check"><span class="ico" data-ico="check"></span><span data-i18n="check"></span></button>
+    </div>
+
+    <div id="readControls" class="controls read">
+      <div class="read-row">
+        <div class="time-input"><div id="inH" class="tbox" data-f="h"></div><span class="colon">:</span><div id="inM" class="tbox" data-f="m"></div></div>
+        <div class="tg ampm-choice"><button data-ap="am" data-i18n="am"></button><button data-ap="pm" data-i18n="pm"></button></div>
+        <button class="btn btn-check" data-act="check"><span class="ico" data-ico="check"></span><span data-i18n="check"></span></button>
+      </div>
+      <div class="numpad" id="numpad"></div>
+    </div>
+
+    <div id="result" class="overlay result-ov">
+      <div class="card result-card">
+        <h2 id="resTitle"></h2>
+        <div id="resStars" class="res-stars"></div>
+        <div id="resTime" class="res-time"></div>
+        <div id="resWords" class="res-words"></div>
+        <div id="resMsg" class="res-msg"></div>
+        <div id="resPoints" class="res-points"></div>
+        <div id="resSticker" class="res-sticker"><span data-i18n="newSticker"></span></div>
+        <div class="res-btns">
+          <button class="btn btn-small" data-res="map"><span class="ico" data-ico="grid"></span><span data-i18n="map"></span></button>
+          <button class="btn btn-small" data-res="again"><span class="ico" data-ico="redo"></span><span data-i18n="again"></span></button>
+          <button class="btn btn-small btn-go" data-res="next"><span data-i18n="next"></span><span class="ico" data-ico="arrow"></span></button>
+        </div>
+      </div>
+    </div>
+
+    <div id="pause" class="overlay dim">
+      <div class="card pause-card">
+        <h2 data-i18n="paused"></h2>
+        <p class="keys-help" data-i18n="keysHelp"></p>
+        <div class="res-btns">
+          <button class="btn btn-small" data-pause="home"><span class="ico" data-ico="home"></span><span data-i18n="home"></span></button>
+          <button class="btn btn-small btn-go" data-pause="resume"><span class="ico" data-ico="play"></span><span data-i18n="resume"></span></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TUTORIAL ============ -->
+  <section id="screen-tutorial" class="screen">
+    <div class="tut-head"><h2 id="tutH"></h2></div>
+    <button class="icon-btn tut-close" data-go="title" aria-label="close"><span class="ico" data-ico="close"></span></button>
+    <div class="tut-panel">
+      <p id="tutP"></p>
+      <div class="tut-nav">
+        <button id="tutBack" class="btn btn-small"><span class="ico" data-ico="arrowl"></span><span data-i18n="back"></span></button>
+        <div id="tutDots" class="tut-dots"></div>
+        <button id="tutListen" class="icon-btn"><span class="ico" data-ico="speaker"></span></button>
+        <button id="tutNext" class="btn btn-small btn-go"><span id="tutNextLbl" data-i18n="next"></span><span class="ico" data-ico="arrow"></span></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PARENTS ============ -->
+  <section id="screen-parents" class="screen">
+    <div class="topbar">
+      <button class="btn btn-small btn-back" data-go="title"><span class="ico" data-ico="home"></span><span data-i18n="back"></span></button>
+      <h2 class="page-title" data-i18n="parentsTitle"></h2>
+      <div></div>
+    </div>
+    <div id="gate" class="gate card">
+      <p id="gateQ"></p>
+      <div id="gateOpts" class="gate-opts"></div>
+      <p id="gateMsg" class="gate-msg"></p>
+    </div>
+    <div id="dash" class="dash"></div>
+  </section>
+
+  <!-- ============ CREDITS ============ -->
+  <section id="screen-credits" class="screen">
+    <div class="topbar">
+      <button class="btn btn-small btn-back" data-go="title"><span class="ico" data-ico="home"></span><span data-i18n="back"></span></button>
+      <h2 class="page-title" data-i18n="creditsTitle"></h2>
+      <div></div>
+    </div>
+    <div class="card credits-card">
+      <h1 class="credits-logo" data-i18n="title"></h1>
+      <dl class="credits-list">
+        <dt data-i18n="version"></dt><dd>v0.1.2</dd>
+        <dt data-i18n="date"></dt><dd>2026-11-08</dd>
+        <dt data-i18n="creator"></dt><dd>Shawn Rapaz</dd>
+        <dt data-i18n="madeWith"></dt><dd>Claude Code</dd>
+        <dt data-i18n="website"></dt><dd><a href="https://shoukugames.org/" class="ext">https://shoukugames.org/</a></dd>
+        <dt data-i18n="email"></dt><dd><a href="mailto:info@shoukugames.org" class="ext">info@shoukugames.org</a></dd>
+        <dt data-i18n="license"></dt><dd>GNU GPL v3.0</dd>
+      </dl>
+      <p class="license-text" data-i18n="licenseText"></p>
+      <p class="font-credit">Font: M PLUS Rounded 1c — SIL Open Font License 1.1 · Voice: Kokoro-82M — Apache License 2.0</p>
+      <p class="thanks" data-i18n="thanks"></p>
+    </div>
+  </section>
+
+  <canvas id="fx" width="1280" height="720"></canvas>
+</div>
+
+<script src="js/i18n.js"></script>
+<script src="js/storage.js"></script>
+<script src="js/audio.js"></script>
+<script src="js/animals.js"></script>
+<script src="js/scene.js"></script>
+<script src="js/icons.js"></script>
+<script src="js/tutorial.js"></script>
+<script src="js/parents.js"></script>
+<script src="js/game.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

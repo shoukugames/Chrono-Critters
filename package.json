@@ -1,0 +1,81 @@
+{
+  "name": "chrono-critters",
+  "productName": "Chrono Critters",
+  "version": "0.1.2",
+  "description": "Learn to read an analog clock with cute animal friends! A bilingual (English / Japanese) clock-learning game for ages 3+.",
+  "main": "main.js",
+  "homepage": "https://shoukugames.org/",
+  "author": {
+    "name": "Shawn Rapaz",
+    "email": "info@shoukugames.org",
+    "url": "https://shoukugames.org/"
+  },
+  "license": "GPL-3.0-or-later",
+  "scripts": {
+    "start": "electron .",
+    "dist:linux": "electron-builder --linux deb",
+    "dist:win": "electron-builder --win nsis",
+    "dist": "electron-builder --linux deb --win nsis"
+  },
+  "devDependencies": {
+    "@fontsource/m-plus-rounded-1c": "^5.3.0",
+    "electron": "^33.4.11",
+    "electron-builder": "^25.1.8"
+  },
+  "build": {
+    "appId": "org.shoukugames.chronocritters",
+    "productName": "Chrono Critters",
+    "copyright": "Copyright © 2026 Shawn Rapaz",
+    "directories": {
+      "output": "dist",
+      "buildResources": "assets"
+    },
+    "files": [
+      "main.js",
+      "src/**/*",
+      "LICENSE",
+      "package.json"
+    ],
+    "linux": {
+      "target": [
+        "deb"
+      ],
+      "category": "Education",
+      "icon": "assets/icon.png",
+      "synopsis": "Learn to read an analog clock with cute animals (ages 3+)",
+      "description": "Chrono Critters is a bilingual (English / Japanese) game that teaches young children to read and set an analog clock, including AM and PM.",
+      "maintainer": "Shawn Rapaz <info@shoukugames.org>",
+      "vendor": "Shouku Games",
+      "executableName": "chrono-critters",
+      "desktop": {
+        "Name": "Chrono Critters",
+        "Comment": "Learn to tell time with cute animal friends",
+        "Keywords": "clock;time;learning;kids;education;"
+      }
+    },
+    "deb": {
+      "recommends": [
+        "speech-dispatcher"
+      ],
+      "artifactName": "${name}_${version}_${arch}.${ext}"
+    },
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "assets/icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "shortcutName": "Chrono Critters",
+      "artifactName": "Chrono-Critters-Setup-${version}.${ext}"
+    }
+  }
+}
