@@ -73,6 +73,15 @@ Chrono Critters is a gentle, colorful game that teaches young children how an an
 
 Everything can also be played with the mouse or a touch screen using the buttons on screen. Tap a hand button for one step, or press and hold it to keep the hand moving.
 
+## Play in the browser
+
+Chrono Critters also runs in a web browser, on computers, phones and tablets, with nothing
+to install: <https://shoukugames.org/play/chrono-critters/> (test page). Progress and stickers
+are saved in the browser.
+
+The `src/` folder is the whole game: serve or upload it as-is. `src/js/web-fit.js` scales the
+layout to fit phone screens (desktop browsers and the app ignore it).
+
 ## Installing
 
 ### Linux (Debian / Ubuntu): `.deb`
