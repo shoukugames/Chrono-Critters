@@ -1,0 +1,12 @@
+{
+ "_note": "Replace identity_name, publisher and publisher_display_name with the values from Partner Center (Product management -> Product identity) before uploading to the Microsoft Store.",
+ "identity_name": "ShoukuGames.ChronoCritters",
+ "publisher": "CN=ShoukuGamesPlaceholder",
+ "publisher_display_name": "Shouku Games",
+ "display_name": "Chrono Critters",
+ "description": "Turn the clock hands to match the time and help 24 cute animal friends! Learn the short hand, the long hand and AM and PM, then hear the time spoken out loud.",
+ "file_name": "ChronoCritters",
+ "exe_name": "ChronoCritters.exe",
+ "alias": "shouku-chrono-critters.exe",
+ "device_capabilities": []
+}
